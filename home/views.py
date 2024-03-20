@@ -12,7 +12,10 @@ def home(request):
     if request.method=="POST":
         data=request.POST
         text = data.get('text')
+        print(text)
         language = data.get('language') 
+        print(language)
+        
         base_text="I will give an algorithm. Give a fully functional code based on it, without any errors. "
         url = "https://api.textcortex.com/v1/codes"
         api_key=os.environ.get('API_KEY')
@@ -35,6 +38,6 @@ def home(request):
         # Extract and print the text from the response
         output_text = response_data["data"]["outputs"][0]["text"]
         remaining_credits=response_data["data"]["remaining_credits"]
-        print(output_text)
-        print(remaining_credits)
+        # print(output_text)
+        # print(remaining_credits)
         return JsonResponse({"code":output_text, "remaining_credits":remaining_credits})
