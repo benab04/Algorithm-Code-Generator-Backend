@@ -34,10 +34,11 @@ def home(request):
 
         response = requests.request("POST", url, json=payload, headers=headers)
         response_data = json.loads(response.text)
-
-        # Extract and print the text from the response
-        output_text = response_data["data"]["outputs"][0]["text"]
-        remaining_credits=response_data["data"]["remaining_credits"]
-        # print(output_text)
-        # print(remaining_credits)
-        return JsonResponse({"code":output_text, "remaining_credits":remaining_credits})
+        try:
+            output_text = response_data["data"]["outputs"][0]["text"]
+            remaining_credits=response_data["data"]["remaining_credits"]
+            
+            return JsonResponse({"code":output_text, "remaining_credits":remaining_credits})
+        except Exception as e:
+            return JsonResponse({"code":"Some error occured, try a different question", "remaining_credits":"NaN"})
+                       
