@@ -41,4 +41,5 @@ def home(request):
             return JsonResponse({"code":output_text, "remaining_credits":remaining_credits})
         except Exception as e:
             return JsonResponse({"code":"Some error occured, try a different question", "remaining_credits":"NaN"})
-                       
+    return JsonResponse({"message":"Server booted"})
+    
